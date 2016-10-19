@@ -3,4 +3,10 @@ extends layout
 block content
   h1= title
   div.row
-    
+    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/")
+      div.row
+        div(input-field col s12)
+        i(class="material-icons") assignment
+        label(for="textarea")  Input Your Memo :
+        textarea(id="content_memo", name="content_memo", class="materialize-textarea", required)
+        input(type="submit", value="Add New Memo", class="waves-effect waves-light btn-large")
