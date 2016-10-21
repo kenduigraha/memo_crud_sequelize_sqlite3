@@ -18,15 +18,14 @@ block content
           th(data-field="id") Id
           th(data-field="content") Content
       tbody
-        - for (var i = 0 ; i < 5 ; i++)
-          tr
-            if typeof data_memo[i] != "undefined"
-              td #{data_memo[i].id}
-              td #{data_memo[i].content}
-            else
-              td &nbsp;
-              td &nbsp;
-
+      - for (var i = 0 ; i < 5 ; i++)
+        tr
+          if typeof data_memo[i] != "undefined"
+            td(style="width: 150px") #{data_memo[i].id}
+            td #{data_memo[i].content}
+          else
+            td &nbsp;
+            td &nbsp;
   div.row
     ul.pagination
       if page_id == 1
