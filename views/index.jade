@@ -24,20 +24,31 @@ block content
               td #{data_memo[i].id}
               td #{data_memo[i].content}
             else
-              td
-              td
+              td ==
+              td ==
 
   div.row
     ul.pagination
-      li.disabled
-        a(href='/p/prev')
-          i.material-icons chevron_left
+      if page_id == 1
+        li.disabled
+          a(href=`/p/${1}`)
+            i.material-icons chevron_left
+      else
+        li.waves-effect
+          a(href=`/p/${Number(page_id)-1}`)
+            i.material-icons chevron_left
+
       - for(var i = 0 ; i < data_memo_page.length/5 ; i++)
           li
             a(href='/p/#{i+1}') #{i+1}
-      li.waves-effect
-        a(href='/p/next')
-          i.material-icons chevron_right
+      if page_id == (Math.floor(data_memo_page.length/5))+1
+        li.disabled
+          a(href=`/p/${(Math.floor(data_memo_page.length/5))+1}`)
+            i.material-icons chevron_right
+      else
+        li.waves-effect
+          a(href=`/p/${Number(page_id)+1}`)
+            i.material-icons chevron_right
   <!--Let browser know website is optimized for mobile-->
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   script(type='text/javascript', src='/javascripts/jquery-3.1.1.min.js')
