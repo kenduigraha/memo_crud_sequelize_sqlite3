@@ -3,10 +3,10 @@ var router = express.Router();
 let models = require('../models')
 let Memos = models.Memos
 /* GET home page. */
-router.get('/p?/:id?', function(req, res, next) {
+router.get('/p/:id', function(req, res, next) {
   let id = req.params.id
   let set_offset = (id - 1) * 5
-  console.log(`saf`);
+  // console.log(`saf`);
   Memos.findAll({
     offset: set_offset,
     limit: 5
@@ -16,6 +16,10 @@ router.get('/p?/:id?', function(req, res, next) {
     })
   })
 });
+
+router.get('/', function(req,res){
+  res.redirect('/p/1')
+})
 
 // router.get('/p/:id', function(req, res, next) {
 //   let id = req.params.id
