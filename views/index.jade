@@ -38,7 +38,7 @@ block content
             i.material-icons chevron_left
 
       - for(var i = 0 ; i < data_memo_page.length/5 ; i++)
-          li
+          li(class="waves-effect")
             a(href='/p/#{i+1}') #{i+1}
       if page_id == (Math.floor(data_memo_page.length/5))+1
         li.disabled
