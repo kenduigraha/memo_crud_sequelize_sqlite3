@@ -3,13 +3,16 @@ extends layout
 block content
   h1= title
   div.row
-    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/p/#{(Math.floor(data_memo_page.length/5))+1}/add")
+    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/p/1/add")
       div.row
         div(input-field col s12)
         i(class="material-icons") assignment
         label(for="textarea")  Input Your Memo :
         textarea(id="content_memo", name="content_memo", class="materialize-textarea", required)
-        input(type="submit", value="Add New Memo", class="waves-effect waves-light btn-large", id ="add-button")
+        //- input(type="submit", value="Add New Memo", class="waves-effect waves-light btn-large", id ="add-button")
+        if err
+          p #{err}
+        a(href="/p/1/add", onclick="document.forms['memo_form'].submit(); return false;", class="waves-effect waves-light btn-large") Input Memo
 
   div.row
     table.striped

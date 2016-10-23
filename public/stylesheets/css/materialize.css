@@ -5260,6 +5260,7 @@ button.btn-floating {
   top: 0;
   left: 0;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .waves-circle {
