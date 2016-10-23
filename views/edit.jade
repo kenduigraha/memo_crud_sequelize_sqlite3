@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.container
+    h1= title
+    <!-- Form Edit -->
+    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/p/1/add")
+      div.row
+        div(input-field col s12)
+        i(class="material-icons") assignment
+        label(for="textarea")  Input Your Memo :
+        textarea(id="content_memo", name="content_memo", class="materialize-textarea", required)
+        //- input(type="submit", value="Add New Memo", class="waves-effect waves-light btn-large", id ="add-button")
+        if err
+          p #{err}
+        a(href="/p/1/add", onclick="document.forms['memo_form'].submit(); return false;", class="waves-effect waves-light btn-large light-blue accent-2") Input Memo
+    <!-- End Form Edit -->

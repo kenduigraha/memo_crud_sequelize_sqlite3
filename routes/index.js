@@ -3,9 +3,9 @@ var router = express.Router();
 let models = require('../models')
 let Memos = models.Memos
 /* GET home page. */
-router.get('/p/:id/', function(req, res, next) {
-  let id = req.params.id
-  let set_offset = (id - 1) * 5
+router.get('/p/:page/', function(req, res, next) {
+  let page = req.params.page
+  let set_offset = (page - 1) * 5
   // console.log(`saf`);
   Memos.findAll({
     offset: set_offset,
@@ -13,7 +13,7 @@ router.get('/p/:id/', function(req, res, next) {
     order: 'id DESC'
   }).then((data_memo) => {
     Memos.findAll().then((data_memo_page) => {
-      res.render('index', { title: 'Memo', data_memo: data_memo, data_memo_page: data_memo_page, page_id: req.params.id});
+      res.render('index', { title: 'Memo', data_memo: data_memo, data_memo_page: data_memo_page, page: page});
     })
   })
 });
@@ -22,44 +22,18 @@ router.get('/', function(req,res){
   res.redirect('/p/1')
 })
 
-// router.get('/p/:id', function(req, res, next) {
-//   let id = req.params.id
-//   let set_offset = (id - 1) * 5
-//   /*
-//   1 : 0 - 4
-//   2 : 5 - 9
-//   3 : 10 - 14
-//   */
-//   Memos.findAll({
-//     offset: set_offset,
-//     limit: 5
-//   }).then((data_memo) => {
-//     res.render('index', { title: 'Memo', data_memo: data_memo });
-//   })
-// });
-
-// router.post('/', (req, res, next) => {
-//   console.log(req.body.content_memo);
-//   Memos.create({
-//     content: req.body.content_memo
-//   }).then(() => {
-//     console.log(`Create Content Memo Success`);
-//   })
-//   res.redirect('/')
-// })
-
-router.post('/p/:id/add', function(req, res, next) {
+router.post('/p/:page/add', function(req, res, next) {
   console.log('aadsfsd');
   if(req.body.content_memo.length === 0){
-    let id = req.params.id
-    let set_offset = (id - 1) * 5
+    let page = req.params.page
+    let set_offset = (page - 1) * 5
     Memos.findAll({
       offset: set_offset,
       limit: 5,
       order: 'id DESC'
     }).then((data_memo) => {
       Memos.findAll().then((data_memo_page) => {
-        res.render('index', { title: 'Memo', data_memo: data_memo, data_memo_page: data_memo_page, page_id: req.params.id, err:"Input must be filled"});
+        res.render('index', { title: 'Memo', data_memo: data_memo, data_memo_page: data_memo_page, page: page, err:"Input must be filled"});
       })
     })
   }else{
@@ -71,5 +45,9 @@ router.post('/p/:id/add', function(req, res, next) {
     })
   }
 });
+
+router.get('/p/:page/edit/:id', fucntion(req, res){
+
+})
 
 module.exports = router;
