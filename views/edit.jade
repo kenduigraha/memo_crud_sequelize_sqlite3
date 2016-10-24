@@ -4,14 +4,14 @@ block content
   div.container
     h1= title
     <!-- Form Edit -->
-    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/p/1/add")
+    form(class="col s12", name="memo_form", id="memo_form", method="post", action="/p/#{page}/update")
       div.row
         div(input-field col s12)
         i(class="material-icons") assignment
-        label(for="textarea")  Input Your Memo :
-        textarea(id="content_memo", name="content_memo", class="materialize-textarea", required)
-        //- input(type="submit", value="Add New Memo", class="waves-effect waves-light btn-large", id ="add-button")
+        label(for="textarea")  Edit Your Memo :
+        textarea(id="content_memo", name="content_memo_edit", class="materialize-textarea", required) #{data_edit.content}
+        input(type="hidden", value="#{data_edit.id}", name="data_edit_id")
         if err
           p #{err}
-        a(href="/p/1/add", onclick="document.forms['memo_form'].submit(); return false;", class="waves-effect waves-light btn-large light-blue accent-2") Input Memo
+        a(href="/p/#{page}/update", onclick="document.forms['memo_form'].submit(); return false;", class="waves-effect waves-light btn-large light-blue accent-2") Edit Memo
     <!-- End Form Edit -->

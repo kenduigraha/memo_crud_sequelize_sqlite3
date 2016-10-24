@@ -3,7 +3,7 @@ var router = express.Router();
 let models = require('../models')
 let Memos = models.Memos
 /* GET home page. */
-router.get('/p/:page/', function(req, res, next) {
+router.get('/p/:page', function(req, res, next) {
   let page = req.params.page
   let set_offset = (page - 1) * 5
   // console.log(`saf`);
@@ -41,13 +41,33 @@ router.post('/p/:page/add', function(req, res, next) {
       content: req.body.content_memo
     }).then(() => {
       console.log(`Create Content Memo Success`);
-      res.redirect(`/p/${req.params.id}`)
+      res.redirect(`/p/${req.params.page}`)
     })
   }
 });
 
-router.get('/p/:page/edit/:id', fucntion(req, res){
+router.get('/p/:page/edit/:id', function(req, res, next){
+  Memos.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then((data_edit) => {
+    res.render('edit', {title: "Edit Memo", data_edit: data_edit, page: req.params.page})
+  })
+})
 
+router.post('/p/:page/update', function(req, res, next) {
+  console.log(req.body.content_memo_edit);
+  Memos.update({
+    content: req.body.content_memo_edit
+  },{
+    where: {
+    id: req.body.data_edit_id
+  }
+  }).then(() => {
+    console.log(`Memo Updated`);
+    res.redirect(`/p/${req.params.page}`)
+  })
 })
 
 module.exports = router;
