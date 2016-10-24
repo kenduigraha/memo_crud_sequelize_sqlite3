@@ -53,7 +53,8 @@ block content
         - for(var i = 0 ; i < 10 ; i++)
             if page < 10
               if i === 9
-                li ...
+                li(style="padding-top: 5px")
+                  sub ...
                 if page == i+1
                   li(class="active")
                     a(href='/p/#{max_page}') #{max_page}
@@ -72,10 +73,12 @@ block content
                 li
                   li(class="waves-effect")
                     a(href='/p/#{1}') #{1}
-                li ...
+                li(style="padding-top: 5px")
+                  sub ...
               else if i === 9 && page < max_page
                 if page != max_page-1
-                  li ...
+                  li(style="padding-top: 5px")
+                    sub ...
                 li(class="waves-effect")
                   a(href='/p/#{max_page}') #{max_page}
               else if i < 9
