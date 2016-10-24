@@ -70,4 +70,15 @@ router.post('/p/:page/update', function(req, res, next) {
   })
 })
 
+router.get('/p/:page/delete/:id', function(req, res, next) {
+  Memos.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(()=> {
+    console.log(`delete success`);
+    res.redirect(`/p/${req.params.page}`)
+  })
+})
+
 module.exports = router;
